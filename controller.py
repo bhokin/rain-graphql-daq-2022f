@@ -98,3 +98,31 @@ def get_basin_monthly_average(basin_id):
             for month, amount in cs.fetchall()
         ]
         return result
+
+def get_basin_annual_rainfalls_all_year(basin_id):
+    with db_cursor() as cs:
+        cs.execute("""
+            SELECT year, SUM(daily_avg)
+            FROM (
+                SELECT r.year as year, r.month, r.day, AVG(r.amount) as daily_avg
+                FROM rainfall r
+                INNER JOIN station s ON r.station_id=s.station_id
+                INNER JOIN basin b ON b.basin_id=s.basin_id
+                WHERE b.basin_id=%s
+                GROUP BY r.year, r.month, r.day
+            ) daily_avg
+            GROUP BY year
+        """, [basin_id])
+
+    result = cs.fetchall()
+    annual_rainfalls = []
+
+    if result:
+        for annual_rainfall in result:
+            if annual_rainfall and annual_rainfall[0] and annual_rainfall[1]:
+                amount, year = round(annual_rainfall[0], 2), annual_rainfall[1]
+                print(models.AnnualRainfall(amount, year))
+                annual_rainfalls.append(models.AnnualRainfall(amount, year))
+        return annual_rainfalls
+    else:
+        abort(404)

@@ -133,6 +133,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MonthlyAverage'
+  /basins/{basinId}/allAnnualRainfalls:
+    parameters:
+    - name: basinId
+      in: path
+      required: true
+      schema:
+        type : integer
+    get:
+      summary: Returns a list of annual rainfalls in all available years for a specified basin
+      operationId: controller.get_basin_annual_rainfalls_all_year
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnualRainfall'
 
 components:
   schemas:
