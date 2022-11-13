@@ -51,6 +51,10 @@ paths:
               operationId: controller.get_basin_monthly_average
               parameters:
                 basinId: $response.body#/basinId
+            allAnnualRainfalls:
+              operationId: controller.get_basin_annual_rainfalls_all_year
+              parameters:
+                basinId: $response.body#/basinId
   /stationsInBasin/{basinId}:
     parameters:
     - name: basinId
