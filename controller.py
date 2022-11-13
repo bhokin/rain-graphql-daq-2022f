@@ -120,9 +120,9 @@ def get_basin_annual_rainfalls_all_year(basin_id):
     if result:
         for annual_rainfall in result:
             if annual_rainfall and annual_rainfall[0] and annual_rainfall[1]:
-                amount, year = round(annual_rainfall[0], 2), annual_rainfall[1]
-                print(models.AnnualRainfall(amount, year))
-                annual_rainfalls.append(models.AnnualRainfall(amount, year))
+                year = annual_rainfall[0]
+                amount = round(annual_rainfall[1], 2)
+                annual_rainfalls.append(models.AnnualRainfall(amount=amount, year=year))
         return annual_rainfalls
     else:
         abort(404)
