@@ -1,6 +1,6 @@
 # Rain API with `graphql`
 
-An example project for graphql (a GRAPH Query Language for API) API development using OpenAPI and Python.
+An example project for graphql (a GRAPH Query Language for API) API development using `OpenAPI-to-GraphQL` and `Python`.
 
 ## Reference  
 - This repository is use the code from https://gitlab.com/cjaikaeo/rain-graphql-daq-2022f
